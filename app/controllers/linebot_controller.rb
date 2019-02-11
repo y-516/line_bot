@@ -15,7 +15,8 @@ class LinebotController < ApplicationController
         case event.type
         when Line::Bot::Event::MessageType::Text
           # 正規表現で「〜』をパターンマッチしてkeywordへ格納
-          keyword = event.message['text'].match(/.*「(.+)」.*/)
+          # keyword = event.message['text'].match(/.*「(.+)」.*/)
+          keyword = event.message['text'].match(/.*"岡田".*/)
           # マッチングしたときのみ入力されたキーワードを使用
           if  keyword.present?
             seed2 = select_word
