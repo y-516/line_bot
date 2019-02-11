@@ -20,30 +20,42 @@ class LinebotController < ApplicationController
 
           case input
 
-          when /.*(岡田|おかだ).*/
-            push = "君は岡田だね"
+          when /.*(岡田|おかだ|okada|オカダ).*/
+            push = "プログラマー\n岡田 雄輔"
 
-          when /.*(後藤|ごとう).*/
-            push ="君は後藤だね"
+          when /.*(後藤|ごとう|goto|ゴトウ).*/
+            push ="WEB制作部長\n後藤 真之介"
+
+          when /.*(須田|すだ|suda|スダ).*/
+            push ="プロジェクトマネージャー\n須田 翔太"
+
+          when /.*(前野|まえの|maeno|マエノ).*/
+            push = "WEBマーケティング営業部長\n前野 薫"
+
+          when /.*(さいとう|齋藤|斎藤|斉藤|saito|サイトウ).*/
+            push ="PLUSIDEA PARTNERS\n代表取締役\n齋藤 翔太"
+
+          when /.*(小島|こじま|kozima|kojima|コジマ).*/
+            push ="プログラマー\n小島 拓也"
+
+          when /.*(堤|つつみ|tutumi|ツツミ).*/
+            push ="WEBマーケティング責任者\n堤 大地"
+
+          when /.*(工藤|くどう|kudo|クドウ).*/
+            push ="プログラマー・ライター\n工藤 照芳"
+
+          when /.*(こいけ|小池|koike|コイケ).*/
+            push ="PLUSIDEA\n代表取締役\n小池 隆太"
+
+          else
+            push ="弊社にそのような方はおりません。"
+
           end
-
 
           message = {
             type: 'text',
             text: push
           }
-
-
-
-
-
-
-
-
-
-
-
-
 
           # keyword = event.message['text'].match(/.*岡田.*/)
           # マッチングしたときのみ入力されたキーワードを使用
