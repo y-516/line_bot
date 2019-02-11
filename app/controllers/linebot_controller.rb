@@ -16,33 +16,62 @@ class LinebotController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           # 正規表現で「〜』をパターンマッチしてkeywordへ格納
           # keyword = event.message['text'].match(/.*「(.+)」.*/)
-          keyword = event.message['text'].match(/.*岡田.*/)
-          # マッチングしたときのみ入力されたキーワードを使用
-          if  keyword.present?
-            seed2 = select_word
-            message = [{
-              type: 'text',
-              text: "君は岡田だね"
-            },{
-              type: 'text',
-              # keyword[1]：「」内の文言
-              text: "#{keyword[1]} × #{seed2} !!"
-            }]
-          # マッチングしなかった場合は元々の仕様と同じようにキーワードを2つ選択して返す
-          else
-            seed1 = select_word
-            seed2 = select_word
-            while seed1 == seed2
-              seed2 = select_word
-            end
-            message = [{
-              type: 'text',
-              text: "キーワード何にしようかな"
-            },{
-              type: 'text',
-              text: "#{seed1} × #{seed2} !!"
-            }]
+          input = event.message['text']
+
+          case input
+
+          when /.*(岡田|おかだ).*/
+            push = "君は岡田だね"
+
+          when /.*(後藤|ごとう).*/
+            push ="君は後藤だね"
           end
+
+
+          message = {
+            type: 'text',
+            text: push
+          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+          # keyword = event.message['text'].match(/.*岡田.*/)
+          # マッチングしたときのみ入力されたキーワードを使用
+          # if  keyword.present?
+          #   seed2 = select_word
+          #   message = [{
+          #     type: 'text',
+          #     text: "君は岡田だね"
+          #   },{
+          #     type: 'text',
+          #     # keyword[1]：「」内の文言
+          #     text: "#{keyword[1]} × #{seed2} !!"
+          #   }]
+          # マッチングしなかった場合は元々の仕様と同じようにキーワードを2つ選択して返す
+          # else
+          #   seed1 = select_word
+          #   seed2 = select_word
+          #   while seed1 == seed2
+          #     seed2 = select_word
+          #   end
+          #   message = [{
+          #     type: 'text',
+          #     text: "キーワード何にしようかな"
+          #   },{
+          #     type: 'text',
+          #     text: "#{seed1} × #{seed2} !!"
+          #   }]
+          # end
           client.reply_message(event['replyToken'], message)
         end
       end
