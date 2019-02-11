@@ -22,7 +22,7 @@ class LinebotController < ApplicationController
             seed2 = select_word
             message = [{
               type: 'text',
-              text: "そのキーワードなかなかいいね〜"
+              text: "君は岡田だね"
             },{
               type: 'text',
               # keyword[1]：「」内の文言
